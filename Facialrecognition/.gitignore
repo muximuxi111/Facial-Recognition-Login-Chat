@@ -1,0 +1,53 @@
+# ===== Qt 构建产物 =====
+build-*/
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dll
+*.lib
+*.exe
+*.app
+*.dylib
+*.res
+*.stash
+moc_*.cpp
+moc_*.h
+qrc_*.cpp
+ui_*.h
+*.moc
+debug/
+release/
+qmake_stash/
+.qmake.stash
+
+# ===== Qt Creator 用户配置（含本机绝对路径，不应入库）=====
+*.pro.user
+*.pro.user.*
+*.qmlproject.user
+*.qmlproject.user.*
+*.autosave
+CMakeLists.txt.user*
+
+# ===== 运行时生成的数据 =====
+# 人脸识别训练产物与本地用户库，由程序运行时生成，不入库
+*.xml
+!haarcascade_frontalface_alt2.xml
+*.db
+*.sqlite
+*.sqlite3
+
+# ===== 系统与编辑器 =====
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# ===== 敏感信息 =====
+*.pem
+*.key
+.env

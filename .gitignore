@@ -1,0 +1,21 @@
+# ===== 交付物目录：仅保留最终报告 =====
+# output/ 下是文档生成流水线的中间产物（html、md、yaml 等），无需入库。
+# docs/ 中已有最终版报告，故整体忽略 output。
+output/
+
+# ===== 工作空间辅助目录 =====
+.workbuddy/
+
+# ===== 系统与编辑器 =====
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vscode/
+.idea/
+*.swp
+*~
+
+# ===== 敏感信息 =====
+*.pem
+*.key
+.env
