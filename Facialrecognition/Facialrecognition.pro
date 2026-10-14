@@ -63,7 +63,27 @@ INCLUDEPATH += $$OPENCV_ROOT/include \
                $$OPENCV_ROOT/include/opencv \
                $$OPENCV_ROOT/include/opencv2
 
-LIBS += $$OPENCV_ROOT/x86/mingw/lib/libopencv_*.a
+# 链接目录（该发行版为 MinGW 32bit，库位于 x86/mingw/lib）
+OPENCV_LIBDIR = $$OPENCV_ROOT/x86/mingw/lib
+
+!exists($$OPENCV_LIBDIR) {
+    error("未找到 OpenCV 库目录：$$OPENCV_LIBDIR")
+}
+
+# ------------------------------------------------------------
+# 按实际使用到的模块精确链接，避免把 45 个库全部拖进来：
+#   core        cv::Mat 等基础数据结构
+#   imgproc     cvtColor / resize / equalizeHist
+#   imgcodecs   imread / imwrite
+#   videoio     VideoCapture 摄像头采集
+#   objdetect   CascadeClassifier 人脸检测
+#   face        LBPHFaceRecognizer 人脸识别
+# ------------------------------------------------------------
+OPENCV_MODULES = core imgproc imgcodecs videoio objdetect face
+
+for(mod, OPENCV_MODULES) {
+    LIBS += -L$$OPENCV_LIBDIR -lopencv_$${mod}345
+}
 
 RESOURCES += \
     image.qrc

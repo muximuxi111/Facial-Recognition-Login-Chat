@@ -93,6 +93,11 @@ qmake "OPENCV_ROOT=D:/opencv/opencv3.4-qt-intall/install" ../Facialrecognition.p
 mingw32-make -j8
 ```
 
+> ✅ 本仓库的 `.pro` 配置已在 **Qt 5.14.2 MinGW 7.3.0 32-bit + OpenCV 3.4** 环境下实测通过：
+> qmake 与 mingw32-make 均退出码 0，成功链接生成 `Facialrecognition.exe`（约 2.9 MB）。
+> 链接的 OpenCV 模块为 `core`、`imgproc`、`imgcodecs`、`videoio`、`objdetect`、`face` 共 6 个，
+> 已在 `.pro` 中按实际使用精确声明，未使用通配符拉入无关库。
+
 ---
 
 ## 五、使用说明
@@ -143,6 +148,11 @@ mingw32-make -j8
 **Q：编译报 `undefined reference to cv::xxx`？**
 
 OpenCV 版本与编译器 ABI 不匹配。请确认使用的是 **MinGW 32bit 自编译版**，而非 MSVC 版。
+
+**Q：链接报 `cannot find -lopencv_core345`？**
+
+找不到库文件。确认 `OPENCV_ROOT/x86/mingw/lib/` 下存在 `libopencv_*.dll.a` 文件。
+若你的 OpenCV 版本号不是 `345`（即 3.4.5），需修改 `.pro` 中 `OPENCV_MODULES` 循环里的版本后缀。
 
 **Q：报「未找到 OpenCV 目录」？**
 
